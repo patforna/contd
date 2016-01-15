@@ -2,32 +2,22 @@ package main
 
 import (
 	"fmt"
-	//"time"
+	"os"
 
-	"github.com/fsouza/go-dockerclient"
+	"github.com/patforna/splendid/shipper"
 )
 
 func main() {
-	//endpoint := "unix:///var/run/docker.sock"
-	//client, _ := docker.NewClient(endpoint)
-	client, _ := docker.NewClientFromEnv() // if using docker machine
-	hostConfig := docker.HostConfig{PublishAllPorts: true}
-	createOpts := docker.CreateContainerOptions{
-		Config: &docker.Config{
-			Image: "busybox",
-			//Cmd:   []string{"echo", fmt.Sprintf("hello pat! it's %s", time.Now())},
-			Cmd:   []string{"sleep", "10"},
-		},
-		HostConfig: &hostConfig,
+	shipper := shipper.Shipper{
+		Image: "java:8",
+		Command: "javac -verbose Hello.java",
+		InputDir: "/tmp/input/x",
+		OutputDir: "/tmp/output/x",
 	}
-	container, err := client.CreateContainer(createOpts)
-	if err != nil {
-		fmt.Println("Error: ", err)
-	}
-	err = client.StartContainer(container.ID, &hostConfig)
-	if err != nil {
-		fmt.Println("Error: ", err)
-	} else {
-		fmt.Println("Container started successfully!")
-	}
+	
+	status := shipper.Run()
+
+	fmt.Println("Done.")
+	os.Exit(status)
+
 }
