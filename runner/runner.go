@@ -1,21 +1,22 @@
-package shipper
+package runner
 
 import (
 	"fmt"
+	"log"
 	"strings"
 
 	"github.com/fsouza/go-dockerclient"
 )
 
 // Use to run docker containers.
-type Shipper struct {
-	Image   string
-	Command string
-	InputDir string
-	OutputDir  string
+type Runner struct {
+	Image     string
+	Command   string
+	InputDir  string
+	OutputDir string
 }
 
-func (s *Shipper) Run() int {
+func (s *Runner) Run() int {
 	//endpoint := "unix:///var/run/docker.sock"
 	//client, _ := docker.NewClient(endpoint)
 
@@ -50,7 +51,7 @@ func (s *Shipper) Run() int {
 		panic(err)
 	}
 
-	fmt.Printf("Running container: %s\n", container.ID)
+	log.Printf("Running container: %s\n", container.ID)
 
 	err = client.StartContainer(container.ID, nil)
 	if err != nil {
