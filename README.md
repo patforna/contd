@@ -29,7 +29,7 @@
 
 ## Digitalocean as docker host
 
-    export DIGITALOCEAN_ACCESS_TOKEN=155d80367c265057f4429cea81d11bbe66879dd92ded0e1422ae4f2a079e9111
+    export DIGITALOCEAN_ACCESS_TOKEN=...
     dm create -d digitalocean --digitalocean-region lon1 --digitalocean-size 4gb --digitalocean-image docker droplet
     dm create -d digitalocean --digitalocean-region lon1 --digitalocean-size 1gb --digitalocean-image docker droplet
 
