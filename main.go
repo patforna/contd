@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/patforna/splendid/web"
+	"github.com/patforna/contd/web"
 )
 
 func main() {

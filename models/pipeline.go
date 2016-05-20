@@ -13,12 +13,12 @@ type Pipeline struct {
 	Command   string
 }
 
-func NewPipeline() *Pipeline {
+func NewPipeline(image string, command string) *Pipeline {
 	return &Pipeline{
 		Id:uuid.New(),
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
-		Image:"java:8",
-		Command:"javac -verbose Hello.java",
+		Image: image,
+		Command:command,
 	}
 }

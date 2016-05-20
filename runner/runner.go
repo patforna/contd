@@ -16,7 +16,7 @@ type Runner struct {
 	OutputDir string
 }
 
-func (s *Runner) Run() int {
+func (s *Runner) Run() string {
 	//endpoint := "unix:///var/run/docker.sock"
 	//client, _ := docker.NewClient(endpoint)
 
@@ -51,19 +51,20 @@ func (s *Runner) Run() int {
 		panic(err)
 	}
 
-	log.Printf("Running container: %s\n", container.ID)
+	containerId := container.ID[:12]
+	log.Printf("Running container: %s\n", containerId)
 
 	err = client.StartContainer(container.ID, nil)
 	if err != nil {
 		panic(err)
 	}
 
-	status, err := client.WaitContainer(container.ID)
-	if err != nil {
-		panic(err)
-	}
+	//status, err := client.WaitContainer(container.ID)
+	//if err != nil {
+	//	panic(err)
+	//}
 
 	//client.RemoveContainer(docker.RemoveContainerOptions{Force:true})
 
-	return status
+	return containerId
 }

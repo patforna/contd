@@ -33,4 +33,5 @@ var routes = Routes{
 	Route{"Index", "GET", "/", Index },
 	Route{"NewBuild", "POST", "/builds", NewBuild },
 	Route{"Build", "GET", "/builds/{id}", Build },
+	Route{"Output", "GET", "/output/{build_id}", Output },
 }
